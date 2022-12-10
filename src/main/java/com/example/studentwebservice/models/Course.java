@@ -17,11 +17,17 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String course;
+    private String courseName;
 
     @ManyToMany
     Set<User> users;
 
     @OneToMany
     List<Job> jobs;
+
+    public Course(String courseName) {
+        this.courseName = courseName;
+    }
+
+
 }

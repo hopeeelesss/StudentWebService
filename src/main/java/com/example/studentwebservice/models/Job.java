@@ -20,4 +20,8 @@ public class Job {
     private Course course;
 
     private String fileReference;
+
+    public Job(Course course) {
+        this.course = course;
+    }
 }

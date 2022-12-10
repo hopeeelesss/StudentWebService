@@ -24,7 +24,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration", "/login", "/swagger-ui.html#").permitAll()
+                .antMatchers("/registration", "/login","/**", "/swagger-ui.html#").permitAll()
                 .antMatchers("account/**").authenticated()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.getAuthority())
