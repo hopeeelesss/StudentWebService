@@ -6,21 +6,29 @@ import com.example.studentwebservice.services.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @Api
 @RestController
-@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("register")
-    @ResponseBody
+    @PostMapping("registration")
     private String createUser(@RequestBody User user){
         userService.createUser(user);
         return "Registration complete!";
     }
 
+    @GetMapping("login")
+    private String login(@RequestBody User user){
+        try {
+            userService.loadUserByUsername(user.getUsername());
+        }catch (UsernameNotFoundException e){
+            return e.getMessage();
+        }
+        return "Logged on!";
+    }
 
 }
