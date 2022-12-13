@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "courses")
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String courseName;
@@ -23,11 +23,15 @@ public class Course {
     Set<User> users;
 
     @OneToMany
+            (
+//                    fetch = FetchType.LAZY,
+//                    mappedBy = "course"
+                    cascade = CascadeType.ALL
+            )
     List<Job> jobs;
 
     public Course(String courseName) {
         this.courseName = courseName;
     }
-
 
 }
