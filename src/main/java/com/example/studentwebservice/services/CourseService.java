@@ -41,12 +41,9 @@ public class CourseService {
 
     public Course addToCourse(Long id, Job job){
         Course course = courseRepository.findCourseById(id);
-        System.out.println(courseRepository.findCourseById(id).toString());
         List<Job> jobs = course.getJobs()!= null ? course.getJobs() : new ArrayList<>();
         jobs.add(job);
-        System.out.println(jobs.toString());
         course.setJobs(jobs);
-        System.out.println(course.toString());
         return courseRepository.save(course);
     }
 

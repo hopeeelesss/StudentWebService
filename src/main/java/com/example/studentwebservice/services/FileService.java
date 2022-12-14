@@ -1,6 +1,7 @@
 package com.example.studentwebservice.services;
 
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -22,7 +23,10 @@ public class FileService {
     @Value("${upload.path}")
     private String uploadPath;
 
-    public ResponseEntity uploadFile(MultipartFile file){
+    @Autowired
+    private JobService jobService;
+
+    public ResponseEntity uploadFile(Long id, MultipartFile file){
         try{
             if (file != null && !file.getOriginalFilename().isEmpty()) {
                 File uploadDir = new File(uploadPath);
@@ -33,8 +37,8 @@ public class FileService {
 
                 String uuidFile = UUID.randomUUID().toString();
                 String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-                file.transferTo(new File(getFilePath(file.getOriginalFilename())));
+                jobService.setFileReference(id, getFilePath(resultFilename));
+                file.transferTo(new File(getFilePath(resultFilename)));
             }
         }catch(IOException e){
             System.err.println(e);
@@ -43,7 +47,7 @@ public class FileService {
                 .body(HttpStatus.OK);
     }
 
-    public ResponseEntity downloadFile(String fileName) {
+    public ResponseEntity downloadFile(Long id, String fileName) {
         Path path = Paths.get(getFilePath(fileName));
         Resource resource = null;
         try {

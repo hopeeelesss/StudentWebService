@@ -26,7 +26,7 @@ public class JobService {
     public ResponseEntity create(String name, Long courseId){
         Job job = new Job(name);
         courseService.addToCourse(courseId, job);
-        jobRepository.save(job);
+//        jobRepository.save(job);
         return ResponseEntity.ok()
                 .body(HttpStatus.OK);
     }
@@ -46,6 +46,22 @@ public class JobService {
         if(updatedJob.getFileReference() != null) job.setFileReference(updatedJob.getFileReference());
         if(updatedJob.getName() != null) job.setName(updatedJob.getName());
         return jobRepository.save(job);
+    }
+
+    public ResponseEntity setMark(Long id, Long mark){
+        Job job = jobRepository.findJobById(id);
+        job.setMark(mark);
+        jobRepository.save(job);
+        return ResponseEntity.ok()
+                .body(HttpStatus.OK);
+    }
+
+    public ResponseEntity setFileReference(Long id, String path){
+        Job job = jobRepository.findJobById(id);
+        job.setFileReference(path);
+        jobRepository.save(job);
+        return ResponseEntity.ok()
+                .body(HttpStatus.OK);
     }
 
     public ResponseEntity delete(Long id){
