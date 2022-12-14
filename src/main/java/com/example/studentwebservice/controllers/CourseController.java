@@ -12,7 +12,7 @@ import java.util.List;
 @Api
 @RestController
 @RequestMapping("course")
-@PreAuthorize("hasAuthority('USER')")
+//@PreAuthorize("hasAuthority('USER')")
 public class CourseController {
     @Autowired
     private CourseService courseService;

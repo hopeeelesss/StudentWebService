@@ -16,7 +16,7 @@ import java.util.List;
 @Api
 @RestController
 @RequestMapping("job")
-@PreAuthorize("hasAuthority('USER')")
+//@PreAuthorize("hasAuthority('USER')")
 public class JobController {
     @Autowired
     private JobService jobService;
