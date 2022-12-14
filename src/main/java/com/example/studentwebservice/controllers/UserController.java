@@ -14,14 +14,14 @@ import java.util.List;
 
 @Api
 @RestController
+@RequestMapping("/")
 public class UserController {
     @Autowired
     private UserService userService;
 
     @PostMapping("registration")
-    private String createUser(@RequestBody User user,
-                              @RequestParam(required = false, defaultValue = "Role.USER") Role role){
-        userService.createUser(user, role);
+    private String createUser(@RequestBody User user){
+        userService.createUser(user);
         return "Registration complete!";
     }
 

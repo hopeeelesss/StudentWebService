@@ -46,7 +46,7 @@ public class JobController {
         return jobService.delete(id);
     }
 
-    @PostMapping("{id}/estimate")
+    @PostMapping("estimate/{id}")
     public ResponseEntity setMark(@PathVariable Long id, @RequestParam Long mark){
         return jobService.setMark(id, mark);
     }
