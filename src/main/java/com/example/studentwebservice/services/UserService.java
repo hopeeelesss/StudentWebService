@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,14 @@ public class UserService implements UserDetailsService {
     @Autowired
     private  UserRepository userRepository;
 
+    public List<User> list(){
+        return userRepository.findAll();
+    }
 
-    public void createUser(User user){
+
+    public void createUser(User user, Role role){
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setRoles((Set.of(Role.USER)));
+        user.setRoles((Set.of(role)));
         userRepository.save(user);
     }
 

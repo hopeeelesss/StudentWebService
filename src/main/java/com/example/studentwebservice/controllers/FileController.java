@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Api
 @RestController
-@RequestMapping("jobs/{id}/files")
-@PreAuthorize("hasAuthority('USER')")
+@RequestMapping("job/{id}/files")
+//@PreAuthorize("hasAuthority('USER')")
 public class FileController {
     @Autowired
     private FileService fileService;
