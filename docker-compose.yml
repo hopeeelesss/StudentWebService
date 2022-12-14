@@ -1,0 +1,23 @@
+version: "3"
+services:
+  database:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: student_web_service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    #    container_name: localhost
+    restart: always
+    #    volumes:
+    #      - ./localhost/init.sql:/docker-entrypoint-initdb.d/1.sql
+    ports:
+      - "5432:5432"
+
+  server:
+    container_name: student_web_service
+    #    restart: always
+    build: ./server/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
