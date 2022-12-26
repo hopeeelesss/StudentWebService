@@ -1,6 +1,5 @@
 package com.example.studentwebservice.services;
 
-import com.example.studentwebservice.dto.RegistrationDTO;
 import com.example.studentwebservice.models.Role;
 import com.example.studentwebservice.models.User;
 import com.example.studentwebservice.repos.UserRepository;

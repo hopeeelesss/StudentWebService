@@ -3,7 +3,6 @@ package com.example.studentwebservice.models;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GeneratorType;
 
 import java.util.List;
 import java.util.Set;

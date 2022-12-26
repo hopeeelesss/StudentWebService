@@ -1,14 +1,10 @@
 package com.example.studentwebservice.services;
 
-import com.example.studentwebservice.models.Course;
 import com.example.studentwebservice.models.Job;
-import com.example.studentwebservice.repos.CourseRepository;
 import com.example.studentwebservice.repos.JobRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
