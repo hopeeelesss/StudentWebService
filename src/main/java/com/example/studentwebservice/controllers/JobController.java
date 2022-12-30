@@ -1,17 +1,12 @@
 package com.example.studentwebservice.controllers;
 
-import com.example.studentwebservice.models.Course;
 import com.example.studentwebservice.models.Job;
-import com.example.studentwebservice.repos.JobRepository;
 import com.example.studentwebservice.services.JobService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 @Api
 @RestController
