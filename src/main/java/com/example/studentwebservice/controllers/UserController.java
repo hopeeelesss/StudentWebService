@@ -1,43 +1,45 @@
 package com.example.studentwebservice.controllers;
 
-import com.example.studentwebservice.dto.RegistrationDTO;
-import com.example.studentwebservice.models.Role;
-import com.example.studentwebservice.models.User;
-import com.example.studentwebservice.services.UserService;
+import com.example.studentwebservice.models.Course;
+import com.example.studentwebservice.models.Job;
+import com.example.studentwebservice.services.CourseService;
+import com.example.studentwebservice.services.JobService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @Api
 @RestController
-@RequestMapping("/")
+@RequestMapping("/acc")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private JobService jobService;
 
-    @PostMapping("registration")
-    private String createUser(@RequestBody User user){
-        userService.createUser(user);
-        return "Registration complete!";
+    @Autowired
+    private CourseService courseService;
+
+    @GetMapping("/job/list")
+    public List<Job> getJobList(){
+        return jobService.list();
     }
 
-    @GetMapping("login")
-    private String login(@RequestBody User user){
-        try {
-            userService.loadUserByUsername(user.getUsername());
-        }catch (UsernameNotFoundException e){
-            return e.getMessage();
-        }
-        return "Logged on!";
+    @GetMapping("/job/{id}")
+    public Job getJob(@PathVariable Long id){
+        return jobService.getJob(id);
     }
 
-    @GetMapping("user/list")
-    private List<User> list(){
-        return userService.list();
+    @GetMapping("/course/list")
+    public List<Course> getCourselist(){
+        return courseService.list();
     }
 
+    @GetMapping("/course/{id}")
+    public Course getCourse(@PathVariable Long id){
+        return courseService.getCourse(id);
+    }
 }

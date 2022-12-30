@@ -47,8 +47,8 @@ public class FileService {
                 .body(HttpStatus.OK);
     }
 
-    public ResponseEntity downloadFile(Long id, String fileName) {
-        Path path = Paths.get(getFilePath(fileName));
+    public ResponseEntity downloadFile(Long id) {
+        Path path = Paths.get(jobService.getFileReference(id));
         Resource resource = null;
         try {
             resource = new UrlResource(path.toUri());

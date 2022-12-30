@@ -64,6 +64,10 @@ public class JobService {
                 .body(HttpStatus.OK);
     }
 
+    public String getFileReference(Long id){
+        return jobRepository.findJobById(id).getFileReference();
+    }
+
     public ResponseEntity delete(Long id){
         jobRepository.deleteById(id);
         return ResponseEntity.ok()

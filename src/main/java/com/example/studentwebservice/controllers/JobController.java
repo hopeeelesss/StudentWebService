@@ -26,16 +26,6 @@ public class JobController {
         return jobService.create(name, courseId);
     }
 
-    @GetMapping("list")
-    public List<Job> list(){
-        return jobService.list();
-    }
-
-    @GetMapping("{id}")
-    public Job getCourse(@PathVariable Long id){
-        return jobService.getJob(id);
-    }
-
     @PutMapping("{id}")
     public Job update(@PathVariable Long id, @RequestBody Job updatedJob){
         return jobService.update(id, updatedJob);
@@ -46,7 +36,7 @@ public class JobController {
         return jobService.delete(id);
     }
 
-    @PostMapping("estimate/{id}")
+    @PostMapping("{id}/estimate")
     public ResponseEntity setMark(@PathVariable Long id, @RequestParam Long mark){
         return jobService.setMark(id, mark);
     }

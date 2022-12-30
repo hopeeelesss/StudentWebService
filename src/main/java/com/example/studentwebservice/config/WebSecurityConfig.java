@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -28,12 +26,11 @@ public class WebSecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration", "/login").permitAll()
-//                .antMatchers("account/**").authenticated()
-//                .antMatchers("/").permitAll()
-                .antMatchers("/course/list","/job/list/**", "/job/{id}/**").hasAuthority(Role.USER.getAuthority())
-                .antMatchers("/course/**", "/job/**").hasAuthority(Role.TEACHER.getAuthority())
-                .antMatchers("/**").hasAnyAuthority(Role.ADMIN.getAuthority())
+                .antMatchers("/registration", "/login", "/swagger-ui.html").permitAll()
+                .antMatchers("/acc/**").authenticated()
+                .antMatchers("/course/**", "/job/**").hasAnyAuthority(Role.TEACHER.getAuthority(), Role.ADMIN.getAuthority())
+//                .antMatchers("/course/list/**","/job/list/**", "/job/{id}/**").hasAuthority(Role.USER.getAuthority())
+                .antMatchers("/user/**").hasAuthority(Role.ADMIN.getAuthority())
                 .anyRequest().authenticated().and().httpBasic()
                 .and()
                 .formLogin()
@@ -50,11 +47,6 @@ public class WebSecurityConfig{
                 .httpBasic();
         return http.build();
     }
-
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers(
-//                "/swagger-ui.html");
-//    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(UserRepository userRepo) {

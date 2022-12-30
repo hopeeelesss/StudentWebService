@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Api
 @RestController
-@RequestMapping("job/{id}/files")
+@RequestMapping("/acc/job/{id}/files")
 //@PreAuthorize("hasAuthority('USER')")
 public class FileController {
     @Autowired
@@ -23,7 +23,7 @@ public class FileController {
     }
 
     @GetMapping(path = "get", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity getFile(@PathVariable Long id, @RequestParam("name") String fileName){
-        return fileService.downloadFile(id, fileName);
+    public ResponseEntity getFile(@PathVariable Long id){
+        return fileService.downloadFile(id);
     }
 }

@@ -22,15 +22,6 @@ public class CourseController {
         return courseService.create(course);
     }
 
-    @GetMapping("list")
-    public List<Course> list(){
-        return courseService.list();
-    }
-
-    @GetMapping("{id}")
-    public Course getCourse(@PathVariable Long id){
-        return courseService.getCourse(id);
-    }
 
     @PutMapping("{id}")
     public Course update(@PathVariable Long id, @RequestBody Course updatedCourse){
